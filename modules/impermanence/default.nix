@@ -11,13 +11,13 @@
 
 { user, ... }: {
 
-  imports = [ ./users.nix ];
-
-
-
+  # imports = [ ./users.nix ];
+  users.users.${user}.password = "test";
+  users.users.root.password = "test";
+  
   programs.fuse.userAllowOther = true;
 
-  environment.persistence."/nix/persist" = {
+  environment.persistence."/persist" = {
     directories = [
       "/etc/nixos"
       "/etc/NetworkManager/system-connections"
@@ -46,7 +46,7 @@
     {
       # imports = [ "${impermanence}/home-manager.nix" ]; 
 
-      home.persistence."/nix/persist/home/${user}" = {
+      home.persistence."/persist/home/${user}" = {
         allowOther = true;
         directories = [
           ".android"

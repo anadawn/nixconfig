@@ -303,9 +303,6 @@
 
         file = {
           "rust/default.nix".source = ../modules/languages/rust/default.nix;
-          "python/default.nix".source = ../modules/languages/python/default.nix;
-          ".config/wallpapers".source = ../modules/themes/wallpapers;
-          # "Documents/notes".source = ../notes;
           ".themes".source = ../modules/themes/.themes;
           ".config/scripts".source = ../config/scripts;
           ".config/ytfzf/subscriptions".source = ../config/ytfzf/subscriptions;

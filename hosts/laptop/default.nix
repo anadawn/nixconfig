@@ -24,7 +24,9 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # ../../modules/impermanence
+      ./cpu.nix
+      ./rollback.nix
+       ../../modules/impermanence
       # ../../modules/programs/plymouth
     ];
 
