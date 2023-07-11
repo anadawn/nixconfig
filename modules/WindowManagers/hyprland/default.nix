@@ -17,6 +17,7 @@
     enable = true;
     recommendedEnvironment = true;
     extraConfig = ''
+                    source=~/testfolder/conf.conf
                     bind=,XF86MonBrightnessDown,exec,${pkgs.light}/bin/light -U 10
                     bind=,XF86MonBrightnessUP,exec,${pkgs.light}/bin/light -A 10
 
@@ -44,8 +45,8 @@
 
                     general {
 
-                        gaps_in = 5
-                        gaps_out = 13 
+                        gaps_in = 3
+                        gaps_out = 5 
                         border_size = 2
 
                         layout = master 
@@ -96,11 +97,15 @@
                     windowrulev2 = size 30% 50%, class:^(launcher)$ 
                     windowrulev2 = center, class:^(launcher)$ 
                     windowrulev2 = dimaround, class:^(launcher)$ 
+		    
+		    # reserved areas
+                    monitor=eDP-1,addreserved,0,150,0,0
+		    
 
                     # mpv
                     windowrulev2 = float, class:^(mpv)$ 
-                    windowrulev2 = size 99.5% 99%, class:^(mpv)$ 
-                    windowrulev2 = center, class:^(mpv)$ 
+                    windowrulev2 = size 99.5% 78%, class:^(mpv)$ 
+                    windowrulev2 = move 0 4, class:^(mpv)$ 
 
             	    # playlist
                     windowrulev2 = float, class:^(mpv)$,title:^(playlist)$
@@ -112,7 +117,7 @@
                     # kitty
                     windowrulev2 = float, class:^(ytfzf)$ 
                     windowrulev2 = size 74% 74%, class:^(ytfzf)$ 
-                    windowrulev2 = center, class:^(ytfzf)$ 
+                    windowrulev2 = move 13% 3%, class:^(ytfzf)$ 
 
                     #sleep and lock
                     # exec = swayidle before-sleep 'swaylock -fc 000000'
