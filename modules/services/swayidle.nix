@@ -15,11 +15,11 @@ in
     ];
     timeouts = [
       {
-        timeout = 120;
+        timeout = 600;
         command = "${swaylock} -fc 000000";
       }
       {
-        timeout = 200;
+        timeout = 600;
         command = "hyprctl dispatch dpms off";
         resumeCommand = "hyprctl dispatch dpms on";
       }
