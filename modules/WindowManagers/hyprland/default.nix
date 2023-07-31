@@ -18,8 +18,8 @@
     recommendedEnvironment = true;
     extraConfig = ''
                     source=~/testfolder/conf.conf
-                    bind=,XF86MonBrightnessDown,exec,${pkgs.light}/bin/light -U 10
-                    bind=,XF86MonBrightnessUP,exec,${pkgs.light}/bin/light -A 10
+                    bind=,KP_Subtract,exec,${pkgs.light}/bin/light -U 10
+                    bind=,KP_Add,exec,${pkgs.light}/bin/light -A 10
 
                     monitor= eDP-1, preferred,auto,1.05
 
@@ -99,7 +99,7 @@
                     windowrulev2 = dimaround, class:^(launcher)$ 
 		    
 		    # reserved areas
-                    monitor=eDP-1,addreserved,0,150,0,0
+                    monitor=eDP-1,addreserved,0,185,0,0
 		    
 
                     # mpv
@@ -116,8 +116,8 @@
 
                     # kitty
                     windowrulev2 = float, class:^(ytfzf)$ 
-                    windowrulev2 = size 74% 74%, class:^(ytfzf)$ 
-                    windowrulev2 = move 13% 3%, class:^(ytfzf)$ 
+                    windowrulev2 = size 74% 70%, class:^(ytfzf)$ 
+                    windowrulev2 = move 13% 2%, class:^(ytfzf)$ 
 
                     #sleep and lock
                     # exec = swayidle before-sleep 'swaylock -fc 000000'
