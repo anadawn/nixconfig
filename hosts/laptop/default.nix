@@ -27,7 +27,7 @@
       ./cpu.nix
       ./rollback.nix
        ../../modules/impermanence
-      # ../../modules/programs/plymouth
+       ../../modules/programs/plymouth
     ];
 
   # adb
@@ -38,7 +38,7 @@
   #services.teamviewer.enable = true;
 
   # Doridcam
-  programs.droidcam.enable = true;
+  # programs.droidcam.enable = true;
 
   #opengl
   hardware.opengl = {
@@ -49,7 +49,7 @@
   };
 
 
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
   networking.hostName = "mylaptop";
 
@@ -99,7 +99,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    linuxKernel.packages.linux_6_3.v4l2loopback
+    # linuxKernel.packages.linux_6_4.v4l2loopback
   ];
 
 
