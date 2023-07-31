@@ -144,7 +144,7 @@
   };
 
   # fonts
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     carlito
     vegur
     noto-fonts
@@ -302,7 +302,7 @@
         ];
 
         file = {
-          "rust/default.nix".source = ../modules/languages/rust/default.nix;
+          # "rust/default.nix".source = ../modules/languages/rust/default.nix;
           ".themes".source = ../modules/themes/.themes;
           ".config/scripts".source = ../config/scripts;
           ".config/ytfzf/subscriptions".source = ../config/ytfzf/subscriptions;
