@@ -12,8 +12,9 @@
 { user, ... }: {
 
   # imports = [ ./users.nix ];
-  users.users.${user}.password = "test";
-  users.users.root.password = "test";
+  users.users.${user}.hashedPassword = "$y$j9T$wYt/.olPs84rNyvFBi5xK/$qFWjsE2NPx.N3D/kFg6baamCj/hS5UIGFCpP70Yj9Z.";
+
+  users.users.root.hashedPassword = "$y$j9T$wYt/.olPs84rNyvFBi5xK/$qFWjsE2NPx.N3D/kFg6baamCj/hS5UIGFCpP70Yj9Z.";
   
   programs.fuse.userAllowOther = true;
 
@@ -25,7 +26,7 @@
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/systemd"
-      "/var/lib/flatpak"
+      # "/var/lib/flatpak"
       "/var/log"
       "/var/cache"
       "/root/.cache/nix"
@@ -85,7 +86,7 @@
           ".local/share/password-store"
           ".local/share/gurk"
           ".local/share/gnupg"
-          ".local/share/flatpak"
+          # ".local/share/flatpak"
 
           ".local/state/wireplumber"
 
