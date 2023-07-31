@@ -2,7 +2,7 @@
   boot.initrd.systemd.services.rollback = {
     description = "Rollback root subvolume to blank state";
     wantedBy = ["initrd.target"];
-    after = ["dev-vg0-system.device"];
+    after = ["dev-vg0-nix.device"];
     before = ["sysroot.mount"];
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
@@ -24,7 +24,7 @@
       btrfs subvolume delete "/mnt/home"
 
       echo "restoring blank /home subvolume..."
-      btrfs subvolume snapshot "/mnt/home-blank" "/mnt/home"
+      btrfs subvolume snapshot "/mnt/home-blank2" "/mnt/home"
 
       umount /mnt
     '';
