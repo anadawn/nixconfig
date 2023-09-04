@@ -130,11 +130,6 @@
         tdesktop # telegram
         gurk-rs
 	wl-clipboard
-       # lobster-movie # cli tool for streaming movies and series
-       # oi # cli program for quick google search
-       # tt # cli typing test
-       # redqu # media centric reddit client 
-       # gogpt # media centric reddit client 
         scripts
       ];
 
