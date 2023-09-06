@@ -26,7 +26,7 @@
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/systemd"
-      # "/var/lib/flatpak"
+      "/var/lib/flatpak"
       "/var/log"
       "/var/cache"
       "/root/.cache/nix"
@@ -55,6 +55,8 @@
           "nixconfig"
           ".ssh"
           ".w3m"
+	  ".var"
+	  ".ipython"
 
           "Desktop"
           "testfolder"
@@ -68,6 +70,7 @@
           ".config/lobster"
           ".config/toot"
           ".config/gurk"
+	  ".config/Signal"
 
           ".cache/dconf"
           ".cache/fontconfig"
@@ -86,7 +89,7 @@
           ".local/share/password-store"
           ".local/share/gurk"
           ".local/share/gnupg"
-          # ".local/share/flatpak"
+          ".local/share/flatpak"
 
           ".local/state/wireplumber"
 

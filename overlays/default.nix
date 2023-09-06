@@ -4,7 +4,8 @@ self: super:
   waybar = super.waybar.overrideAttrs (oldAttrs: {
     mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
   });
-  scripts = super.callPackage ../modules/programs/chpaper.nix { }; # set and change wallpaper 
+  chpaper = super.callPackage ../modules/programs/chpaper.nix { }; # set and change wallpaper 
+  scripts = super.callPackage ../config/scripts {};
   catppuccin-wallpaper = super.callPackage ../modules/programs/wallpaper.nix { }; # wallpaper repo
   lobster-movie = super.callPackage ../modules/programs/lobster-movie.nix { }; # cli tool for streaming movies and series
   oi = super.callPackage ../modules/programs/oi.nix { }; # cli program for quick google search

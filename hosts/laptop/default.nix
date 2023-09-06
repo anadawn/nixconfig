@@ -76,6 +76,7 @@
     # kernelParams = [ "quiet" ];
   };
 
+   services.flatpak.enable = true;
 
   #virtualisation
   virtualisation.libvirtd = {
@@ -123,6 +124,7 @@
 
       home.packages = with pkgs; [
         neofetch
+	unzip
         virt-manager
 	signal-desktop
         #htop
@@ -130,6 +132,15 @@
         tdesktop # telegram
         gurk-rs
 	wl-clipboard
+<<<<<<< HEAD
+       # lobster-movie # cli tool for streaming movies and series
+       # oi # cli program for quick google search
+       # tt # cli typing test
+       # redqu # media centric reddit client 
+       # gogpt # media centric reddit client 
+        chpaper
+=======
+>>>>>>> 8b469f99e75c3369076cffb3bbeda53ca19e13bc
         scripts
       ];
 

@@ -84,6 +84,11 @@
           action = "<C-w>l";
         };
 
+        "<Leader>p" = {
+          silent = true;
+          action = ":w !python<CR>";
+        };
+
       };
       terminal = {
         "<Leader><Esc>" = {
@@ -205,6 +210,10 @@
 
       luasnip = {
         enable = true;
+	fromVscode = [
+	  {}
+	  { lazyLoad = true; }
+	];
 
       };
 
@@ -213,6 +222,7 @@
         servers = {
           # rnix-lsp.enable = true;
           rust-analyzer.enable = true;
+	  pylsp.enable = true;
         };
       };
 

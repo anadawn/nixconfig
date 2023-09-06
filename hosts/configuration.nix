@@ -302,7 +302,7 @@
         ];
 
         file = {
-          # "rust/default.nix".source = ../modules/languages/rust/default.nix;
+          "testfolder/python/default.nix".source = ../modules/languages/python/default.nix;
           ".themes".source = ../modules/themes/.themes;
           ".config/scripts".source = ../config/scripts;
           ".config/ytfzf/subscriptions".source = ../config/ytfzf/subscriptions;

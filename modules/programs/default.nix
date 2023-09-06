@@ -34,7 +34,7 @@
   ./pistol.nix
   #./NeST.nix
   #./qute.nix
-  ./chromium.nix
+  # ./chromium.nix
   #./atuin.nix
   #./plymouth
   ./nixvim.nix
