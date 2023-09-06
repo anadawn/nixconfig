@@ -99,12 +99,12 @@
                     windowrulev2 = dimaround, class:^(launcher)$ 
 		    
 		    # reserved areas
-                    monitor=eDP-1,addreserved,0,210,0,0
+                    monitor=eDP-1,addreserved,0,240,0,0
 		    
 
                     # mpv
                     windowrulev2 = float, class:^(mpv)$ 
-                    windowrulev2 = size 99.5% 70%, class:^(mpv)$ 
+                    windowrulev2 = size 99.5% 66%, class:^(mpv)$ 
                     windowrulev2 = move 0 4, class:^(mpv)$ 
 
             	    # playlist
@@ -116,12 +116,12 @@
 
                     # kitty
                     windowrulev2 = float, class:^(ytfzf)$ 
-                    windowrulev2 = size 74% 65%, class:^(ytfzf)$ 
+                    windowrulev2 = size 74% 63%, class:^(ytfzf)$ 
                     windowrulev2 = move 13% 3%, class:^(ytfzf)$ 
 
                     # JupyterLab
                     windowrulev2 = float, class:^(jupyterlab-desktop)$ 
-                    windowrulev2 = size 99.5% 70%, class:^(jupyterlab-desktop)$ 
+                    windowrulev2 = size 99.5% 66%, class:^(jupyterlab-desktop)$ 
                     windowrulev2 = move 0 4, class:^(jupyterlab-desktop)$ 
 
                     #sleep and lock
