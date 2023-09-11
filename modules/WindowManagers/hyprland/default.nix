@@ -201,7 +201,7 @@
         "SUPER, W, exec, ${pkgs.scripts}/bin/chpaper $(wallhaven ${config.xdg.userDirs.pictures}/Wallpapers)"
 
         # brightness
-        ",KP_Subtract,${pkgs.light}/bin/light -U 10"
+        ",KP_Subtract,exec,${pkgs.light}/bin/light -U 10"
         ",KP_Add,exec,${pkgs.light}/bin/light -A 10"
 
         # floating, fullscreen and focus
