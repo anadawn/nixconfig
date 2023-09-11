@@ -100,25 +100,25 @@
           method = "symlink";
          }
 
-         # {
-         #  directory = "Videos";
-         #  method = "symlink";
-         # }
+         {
+          directory = "Videos";
+          method = "symlink";
+         }
 
          {
           directory = "testfolder";
           method = "symlink";
          }
 
-         # {
-         #  directory = "Pictures";
-         #  method = "symlink";
-         # }
-         #
-         # {
-         #  directory = "Other";
-         #  method = "symlink";
-         # }
+         {
+          directory = "Pictures";
+          method = "symlink";
+         }
+
+         {
+          directory = "Other";
+          method = "symlink";
+         }
 
         ];
         files = [
