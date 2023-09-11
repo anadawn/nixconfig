@@ -1,9 +1,6 @@
 self: super:
 {
   adi1090x-plymouth = super.callPackage ../modules/programs/plymouth/adi1090x-plymouth { };
-  waybar = super.waybar.overrideAttrs (oldAttrs: {
-    mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-  });
   chpaper = super.callPackage ../modules/programs/chpaper.nix { }; # set and change wallpaper 
   scripts = super.callPackage ../config/scripts {};
   catppuccin-wallpaper = super.callPackage ../modules/programs/wallpaper.nix { }; # wallpaper repo

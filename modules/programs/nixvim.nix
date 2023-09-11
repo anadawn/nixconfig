@@ -17,6 +17,7 @@
       showmode = false;
       clipboard = "unnamedplus";
       wrap = true;
+      foldmethod = "marker";
     };
 
     globals = {
@@ -32,6 +33,11 @@
         "<Leader>j" = {
           silent = true;
           action = ":bp<CR>";
+        };
+
+        "<Leader>g" = {
+          silent = true;
+          action = ":Glow<CR>";
         };
 
         "<Leader>k" = {
@@ -104,6 +110,7 @@
       quick-scope
       vimwiki
       friendly-snippets
+      glow-nvim
     ];
 
     extraPackages = with pkgs; [
@@ -124,7 +131,7 @@
 
             vim.g.gitblame_date_format = '%r'
             vim.g.gitblame_message_when_not_committed = '''
-
+            vim.cmd("let g:vimwiki_list = [{'path': '~/nixconfig/notes/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]")
       	'';
     extraConfigLua = '' 
                    require("lualine").setup { 
@@ -140,7 +147,13 @@
                    },
 	          },
                   }
-		  require'lspconfig'.nil_ls.setup{}
+		   require'lspconfig'.nil_ls.setup{}
+                   require("glow").setup({
+			width = 200,
+			border = "none",
+			width_ratio = 1,
+			height_ratio = 1,
+				   })
 		  '';
 
 
@@ -164,6 +177,14 @@
         indent = true;
         incrementalSelection.enable = true;
 
+      };
+
+
+      magma-nvim  = {
+       enable = true;
+       automaticallyOpenOutput = true;
+       imageProvider = "kitty";
+       wrapOutput = true;
       };
 
       nvim-cmp = {

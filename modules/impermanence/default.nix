@@ -13,7 +13,7 @@
 
   # imports = [ ./users.nix ];
   users.users.${user}.hashedPassword = "$y$j9T$wYt/.olPs84rNyvFBi5xK/$qFWjsE2NPx.N3D/kFg6baamCj/hS5UIGFCpP70Yj9Z.";
-
+ 
   users.users.root.hashedPassword = "$y$j9T$wYt/.olPs84rNyvFBi5xK/$qFWjsE2NPx.N3D/kFg6baamCj/hS5UIGFCpP70Yj9Z.";
   
   programs.fuse.userAllowOther = true;
@@ -27,6 +27,7 @@
       "/var/lib/nixos"
       "/var/lib/systemd"
       "/var/lib/flatpak"
+      "/var/lib/machines"
       "/var/log"
       "/var/cache"
       "/root/.cache/nix"
@@ -34,11 +35,6 @@
 
     files = [
       "/etc/machine-id"
-      "/var/lib/logrotate.status"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
     ];
   };
 
@@ -52,16 +48,11 @@
         directories = [
           ".android"
           ".mozilla"
-          "nixconfig"
           ".ssh"
           ".w3m"
 	  ".var"
 	  ".ipython"
 
-          "Desktop"
-          "testfolder"
-          "Downloads"
-          "Documents"
 
           ".config/neofetch"
           ".config/htop"
@@ -70,7 +61,8 @@
           ".config/lobster"
           ".config/toot"
           ".config/gurk"
-	  ".config/Signal"
+          ".config/Signal"
+	  ".config/wallpaper"
 
           ".cache/dconf"
           ".cache/fontconfig"
@@ -93,13 +85,46 @@
 
           ".local/state/wireplumber"
 
+         {
+          directory = "nixconfig";
+          method = "symlink";
+         }
+
+         {
+          directory = "Downloads";
+          method = "symlink";
+         }
+
+         {
+          directory = "Documents";
+          method = "symlink";
+         }
+
+         {
+          directory = "Videos";
+          method = "symlink";
+         }
+
+         {
+          directory = "testfolder";
+          method = "symlink";
+         }
+
+         {
+          directory = "Pictures";
+          method = "symlink";
+         }
+
+         {
+          directory = "Other";
+          method = "symlink";
+         }
 
         ];
         files = [
 
           ".config/gh/hosts.yml"
           ".config/mimeapps.list"
-          ".gogpt"
 
         ];
       };

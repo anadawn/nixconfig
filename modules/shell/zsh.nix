@@ -28,12 +28,14 @@
     history.path = "${config.xdg.dataHome}/zsh/zsh_history";
     autocd = true;
     shellAliases = {
+      mo = ''find Videos/ -type f -printf "%f\n" | dmenu -i -p "Movies" |
+xargs -I '{}' find ~/Videos/ -name {} | xargs mpv'';
       ll = "ls -l";
       ls = "ls --color=always";
-      nt = ''pushd ~; find nixconfig/notes -name '*.md' | fzf --preview="glow {}" | xargs vi; popd'';
-      sc = ''pushd ~; find nixconfig/config/scripts -name '*.sh' | fzf --preview="glow {}" | xargs vi; popd'';
-      notes = ''pushd ~; find Documents/notes/vimwiki/ -name '*.md' | fzf --preview="glow {}" | xargs glow -p; popd'';
-      conf = ''pushd ~; find nixconfig -name '*.nix' | fzf --preview="pistol {}" | xargs vi; popd''; # nixos configuration
+      nt = ''pushd /persist/home/aruna; find nixconfig/notes -name '*.md' | fzf --preview="glow {}" | xargs vi; popd'';
+      sc = ''pushd /persist/home/aruna; find nixconfig/config/scripts -name '*.sh' | fzf --preview="pistol {}" | xargs vi; popd'';
+      notes = ''glow  /persist/home/aruna/nixconfig/notes'';
+      conf = ''pushd /persist/home/aruna; find nixconfig -name '*.nix' | fzf --preview="pistol {}" | xargs vi; popd''; # nixos configuration
       # update nixos using flakes
       update = "pushd ~/nixconfig 
                 \n doas nix flake update
@@ -46,8 +48,12 @@
             \n git push 
             \n popd ";
 
+      pg = "pass git push";
+
       # w3m with google search 
       gg = "w3m google.com";
+
+      search = "nix search nixpkgs";
     };
 
     completionInit = "autoload -Uz compinit
@@ -57,7 +63,9 @@
                       ";
 
 
-    # envExtra = 
+     envExtra = ''
+	       export NIXPKGS_ALLOW_UNFREE=1
+	     '';
 
     # defaultKeymap = "viins";
     profileExtra = ''
@@ -66,38 +74,40 @@
       fi
     '';
     initExtra =
-      ''eval "$(starship init zsh)"  
-      export KEYTIMEOUT=1
-      unsetopt BEEP
-      # bindkey -M menuselect 'h' vi-backward-char
-      # bindkey -M menuselect 'k' vi-up-line-or-history
-      # bindkey -M menuselect 'l' vi-forward-char
-      # bindkey -M menuselect 'j' vi-down-line-or-history
-      # bindkey -v '^?' backward-delete-char
-      #
-      # function zle-keymap-select {
-      #  if [[ ''${KEYMAP} == vicmd ]] ||
-      #     [[ $1 = 'block' ]]; then 
-      #   echo -ne '\e[1 q'
-      #  elif [[ ''${KEYMAP} == main ]] ||
-      #       [[ ''${KEYMAP} == viins ]] ||
-      #       [[ ''${KEYMAP} == ' ' ]] ||
-      #       [[ $1 = 'beam' ]]; then 
-      #     echo -ne '\e[5 q'
-      #    fi
-      #  }
-      # zle -N zle-keymap-select
-      # zle-line-init() {
-      #   zle -K viins
-      #   echo -ne "\e[5q"
-      # }
-      # zle -N zle-line-init
-      # echo -ne '\e[5 q'
-      # preexec() { echo -ne '\e[5 q' ;}
-      #
+      ''eval "$(starship init zsh)"
 
+      export KEYTIMEOUT=1
+
+      # nix shell alias
+      shell(){
+      "nix" "shell" "nixpkgs#"$1"" $2
+      }
+
+      # launch w3m with a search query
+
+      ww(){
+      "w3m" "http://localhost:8080/search?q=$*"
+      }
+
+      clone(){
+      repo=$1
+       case "$1" in
+          github.com)
+            "git" "clone" "git@$1:$2" $3
+	  ;;
+          gitlab.com)
+            "git" "clone" "https://$1/$2" $3
+	  ;;
+	esac
+      }
+
+
+      unsetopt BEEP
+
+      # vi mode
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
+      # custom syntax highlighting
       ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern root line)
 
       # Declare the variable
@@ -127,9 +137,6 @@
       ZSH_HIGHLIGHT_STYLES[global-alias]='fg=blue,bold'
 
       ZSH_HIGHLIGHT_STYLES[builtin]='fg=blue,bold'
-
-
-      
       '';
 
 

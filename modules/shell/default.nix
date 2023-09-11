@@ -1,8 +1,8 @@
 [
 
   ./zsh.nix
-  ./fish.nix
-  ./nushell.nix
+  #./fish.nix
+  #./nushell.nix
 
 
 

@@ -8,7 +8,7 @@
 #             └─ ./default.nix
 #     
 
-{ home-manager, nixpkgs, inputs, user, location, stable, impermanence, nixvim, hyprland, ... }:
+{ home-manager, nixpkgs, inputs, user, location, stable, impermanence, nixvim, ... }:
 
 let
   system = "x86_64-linux";
@@ -51,7 +51,6 @@ in
           imports = [
             impermanence.nixosModules.home-manager.impermanence
             nixvim.homeManagerModules.nixvim
-            hyprland.homeManagerModules.default
           ];
         };
         home-manager.useGlobalPkgs = true;
@@ -86,7 +85,6 @@ in
           imports = [
             # impermanence.nixosModules.home-manager.impermanence
             nixvim.homeManagerModules.nixvim
-            # hyprland.homeManagerModules.default
           ];
         };
         home-manager.useGlobalPkgs = true;

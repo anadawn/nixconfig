@@ -18,8 +18,8 @@
         padding = 8;
         horizontal_padding = 8;
         frame_width = 3;
-        frame_color = "#aaaaaa";
-        separator_color = "auto";
+        frame_color = "#151515";
+        separator_color = "151515";
         sort = "yes";
         line_height = 0;
         markup = "full";
@@ -40,13 +40,13 @@
         close = "control+space";
       };
       urgency_low = {
-        background = "#2b2b2b";
-        foreground = "#ffffff";
+        background = "#FFFFFF";
+        foreground = "#151515";
         timeout = 5;
       };
       urgency_normal = {
-        background = "#2b2b2b";
-        foreground = "#ffffff";
+        background = "#FFFFFF";
+        foreground = "#151515";
         timeout = 5;
       };
       urgency_critical = {

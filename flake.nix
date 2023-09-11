@@ -7,32 +7,31 @@
 {
   description = "My personal Nixos Configuration";
 
+  # inputs 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/release-22.11";
+     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+     stable.url = "github:NixOS/nixpkgs/release-22.11";
 
+    # home-manager 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # impermanence 
     impermanence = {
       url = "github:nix-community/impermanence";
     };
 
+    # nixvim 
     nixvim = {
       url = "github:pta2002/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+ };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-
-  outputs = { self, home-manager, nixpkgs, impermanence, stable, nixvim, hyprland, ... }@inputs:
+  # outputs 
+  outputs = { self, home-manager, nixpkgs, impermanence, stable, nixvim, ... }@inputs:
     let
       user = "aruna";
       location = "$HOME/.nixconfig";
@@ -42,9 +41,9 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user location impermanence nixvim stable hyprland;
+          inherit inputs nixpkgs home-manager user location impermanence nixvim stable;
         }
       );
     };
-
 }
+

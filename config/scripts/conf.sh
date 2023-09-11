@@ -8,13 +8,13 @@ config() {
 		"")
 		;;
 	Nixconfig)
-		  kitty --class=ytfzf -e sh -c "pushd ~; find nixconfig -name '*.nix' | fzf --preview=\"pistol {}\" | tee /tmp/path | xargs vi; popd"
+		  kitty --class=ytfzf -e sh -c "pushd /persist/home/aruna; find nixconfig/ -name '*.nix' | fzf --preview=\"pistol {}\" | tee /tmp/path | xargs vi; popd"
 		;;
 	Scripts)
-		 kitty --class=ytfzf -e sh -c "pushd ~; find nixconfig/config/scripts -name '*.sh' | fzf --preview=\"pistol {}\" | tee /tmp/path | xargs vi; popd"
+		 kitty --class=ytfzf -e sh -c "pushd /persist/home/aruna; find nixconfig/config/scripts -name '*.sh' | fzf --preview=\"pistol {}\" | tee /tmp/path | xargs vi; popd"
 		;;
 	Notes)
-		 kitty --class=ytfzf -e sh -c "pushd ~; find nixconfig -name '*.md' | fzf --preview=\"pistol {}\" | tee /tmp/path | xargs vi; popd" 
+		 kitty --class=ytfzf -e sh -c "pushd /persist/home/aruna; find nixconfig -name '*.md' | fzf --preview=\"pistol {}\" | tee /tmp/path | xargs vi; popd" 
 		 ;;
 	Exit) 
 		n=5

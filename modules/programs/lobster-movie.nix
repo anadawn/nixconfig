@@ -12,11 +12,12 @@ stdenv.mkDerivation {
   version = "3.0.4";
 
   src = fetchFromGitHub {
-    owner = "justchokingaround";
-    repo = "lobster";
-    rev = "7bbd799e585e28753b6cba98ab7c6391de43ba87";
-    hash = "sha256-lHynhfs86UAa5tdL5JQN2TnugEEUzjrvPDEb7TUF0Qk=";
-  };
+  owner = "justchokingaround";
+  repo = "lobster";
+  rev = "5f25097b47603b43b440499ada83c302996f59b1";
+  hash = "sha256-537zH23WS5sLLruOaAcchE1lMVnFl+HUtR8hrMbEst4=";
+};
+
   nativeBuildInputs = [ makeWrapper ];
 
   dontBuild = true;

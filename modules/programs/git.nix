@@ -14,6 +14,6 @@
     userEmail = "arunapallickal@gmail.com";
   };
 
-  home.packages = with pkgs; [ git-crypt ];
+  # home.packages = with pkgs; [ git-crypt ];
 
 }

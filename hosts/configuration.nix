@@ -32,16 +32,16 @@
     ];
 
 
-  # Enable flakes
+  # Enable flakes 
   nix = {
     package = pkgs.nixFlakes;
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
     };
-  };
+  };# 
 
-  # move nix daemon from ram to disk )
+  # move nix daemon from ram to disk 
   systemd.services.nix-daemon = {
     environment = {
       #location for temporary files
@@ -51,7 +51,7 @@
       # create /var/cache/nix automatically on nix deamon start
       CacheDirectory = "nix";
     };
-  };
+  };# ∇
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -62,11 +62,11 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  #tty
+  #tty 
   console = {
     keyMap = "us";
     font = "Lat2-Terminus16";
-  };
+  };# 
 
   #autologint
   services.getty.autologinUser = "aruna";
@@ -86,16 +86,16 @@
   # git 
   programs.git.enable = true;
 
-  #pam
+  #pam 
   security.pam.services = {
     swaylock = { }; # for swaylock to work 
     # gpg 
     ${user}.gnupg = {
       enable = true;
     };
-  };
+  }; 
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with ‘passwd’. 
   users = {
     defaultUserShell = pkgs.zsh;
     users.${user} = {
@@ -105,7 +105,7 @@
         # user packages 
       ];
     };
-  };
+  }; 
 
   programs.zsh.enable = true;
 
@@ -121,27 +121,27 @@
   # remove installed by default packages like nano
   environment.defaultPackages = [ ];
 
-  # bash
+  # bash 
   programs.bash = {
     enableCompletion = true;
     enableLsColors = true;
     promptInit = ''eval "$(starship init bash)"'';
-  };
+  }; 
 
 
-  # enable doas
+  # enable doas 
   security = {
     doas = {
       enable = true;
-      # Configure doas
+      # Configure doas 
       extraRules = [{
         users = [ "${user}" ];
         keepEnv = true;
         persist = true;
-      }];
+      }];  
     };
     sudo.enable = false; # disable sudo
-  };
+  }; 
 
   # fonts
   fonts.packages = with pkgs; [
@@ -149,14 +149,14 @@
     vegur
     noto-fonts
     (nerdfonts.override { fonts = [ "Ubuntu" ]; }) # for swaybar config
-  ];
+  ];  
 
 
-  # qt5
+  # qt5 
   qt = {
     platformTheme = "qt5ct";
     style = "gtk2";
-  };
+  };  
 
   environment = {
     pathsToLink = [ "/share/zsh" ];
@@ -189,7 +189,7 @@
     };
     pulse.enable = true;
     jack.enable = true;
-  };
+  };  
 
   # authorisation
   security.polkit.enable = true;
@@ -207,16 +207,16 @@
   # dbus 
   services.dbus = {
     enable = true;
-    packages = [ pkgs.gcr ]; # for gpg authorisation
+    packages = with pkgs; [ gcr gcr_4 ]; # for gpg authorisation
   };
 
-  #xdg
+  #xdg 
   xdg = {
     mime = {
       enable = true;
       defaultApplications = {
         "application/pdf" = "firefox.desktop";
-        "image/png" = "swayimg";
+        "image/png" = "imv";
       };
     };
     portal = {
@@ -224,13 +224,27 @@
       wlr.enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
-  };
+  };  
 
 
-  # Enable the OpenSSH daemon.
+  # Enable the OpenSSH daemon 
   services.openssh = {
     enable = true;
     ports = [ 22 ];
+    settings = {
+      PermitRootLogin = "no";
+    };
+    hostKeys = [
+      {
+        path = "/etc/ssh/keys/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+      {
+        path = "/etc/ssh/keys/ssh_host_rsa_key";
+        type = "rsa";
+        bits = "4096";
+      }
+    ];
   };
 
 
@@ -240,14 +254,17 @@
       # kdconnect
       { from = 1714; to = 1764; }
     ];
-    allowedTCPPorts = [ 8000 7478 4747 ]; # sharing
+    allowedTCPPorts = [
+      #8080 8000 
+    ]; # sharing
   };
-
 
   networking.firewall.allowedUDPPortRanges = [
     # kdeconnect 
     { from = 1741; to = 1764; }
   ];
+
+
 
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -299,28 +316,37 @@
           ytfzf # terminal youtube 
           glib # gsettings
           toot # mastodon cli client
+          wtype
+          ripgrep
+          swaylock
+          wl-clipboard
         ];
 
         file = {
-          "testfolder/python/default.nix".source = ../modules/languages/python/default.nix;
           ".themes".source = ../modules/themes/.themes;
           ".config/scripts".source = ../config/scripts;
           ".config/ytfzf/subscriptions".source = ../config/ytfzf/subscriptions;
-          #".mozilla/firefox/mz4w5cdv.default/chrome".source = ../config/chrome; 
-          #".mozilla/firefox/profiles.ini".source = ../config/firefox/profiles.ini; 
-        };
+          ".w3m/keymap".source = ../config/w3m/keymap;
 
+        };
         stateVersion = "22.05";
       };
 
 
       #default home directories
-      xdg.userDirs = {
+      xdg = {
         enable = true;
-        documents = "${config.home.homeDirectory}/Documents";
-        download = "${config.home.homeDirectory}/Downloads";
-        pictures = "${config.home.homeDirectory}/Pictures";
-        videos = "${config.home.homeDirectory}/Videos";
+        userDirs = {
+          enable = true;
+          createDirectories = true;
+          templates = null;
+          publicShare = null;
+          music = null;
+          desktop = null;
+          extraConfig = {
+            XDG_OTHER_DIR = "${config.home.homeDirectory}/Other";
+          };
+        };
       };
 
       # themes
@@ -329,6 +355,11 @@
         gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
         theme = {
           name = "Catppuccin-Mocha";
+        };
+        cursorTheme = {
+          name = "Catppuccin-Mocha-Dark-Cursors";
+          package = pkgs.catppuccin-cursors.mochaDark;
+          size = 29;
         };
       };
 
@@ -345,3 +376,4 @@
   }; # end of home-manager
 
 } # end of configuration
+

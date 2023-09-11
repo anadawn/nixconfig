@@ -62,7 +62,7 @@
                   #clock,
                   #backlight,
                   #cpu,
-      	    #custom-gpu-usage,
+                  #custom-gpu-usage,
                   #custom-keyboard-layout,
                   #memory,
                   #mode,

@@ -24,18 +24,17 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./cpu.nix
       ./rollback.nix
-       ../../modules/impermanence
-       ../../modules/programs/plymouth
+      ../../modules/impermanence
+      ../../modules/programs/plymouth
     ];
 
   # adb
   programs.adb.enable = true;
 
-
   # teamviewer 
   #services.teamviewer.enable = true;
+
 
   # Doridcam
   # programs.droidcam.enable = true;
@@ -45,11 +44,9 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-   
   };
 
-
-  # services.flatpak.enable = true;
+  services.flatpak.enable = true;
 
   networking.hostName = "mylaptop";
 
@@ -60,7 +57,10 @@
   # Bootloader.
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
       timeout = 0;
       # UEFI settings
       efi = {
@@ -76,15 +76,16 @@
     # kernelParams = [ "quiet" ];
   };
 
-   services.flatpak.enable = true;
 
   #virtualisation
-  virtualisation.libvirtd = {
-    enable = true;
-    package = pkgs.libvirt;
-    qemu.ovmf = {
+  virtualisation = {
+    libvirtd = {
       enable = true;
-      packages = [ pkgs.OVMFFull.fd ];
+      package = pkgs.libvirt;
+      qemu.ovmf = {
+        enable = true;
+        packages = [ pkgs.OVMFFull.fd ];
+      };
     };
   };
 
@@ -100,7 +101,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    # linuxKernel.packages.linux_6_4.v4l2loopback
+    # linuxKernel.packages.linux_6_3.v4l2loopback
   ];
 
 
@@ -126,20 +127,13 @@
         neofetch
 	unzip
         virt-manager
-	signal-desktop
         #htop
         gdu # disk management
         tdesktop # telegram
-        gurk-rs
-	wl-clipboard
-
-       # lobster-movie # cli tool for streaming movies and series
-       # oi # cli program for quick google search
-       # tt # cli typing test
-       # redqu # media centric reddit client 
-       # gogpt # media centric reddit client 
-        chpaper
+        signal-desktop
         scripts
+        jmtpfs
+        imv
       ];
 
 
@@ -148,7 +142,7 @@
         # all shell aliases
 
         # rebuild nixos using flake
-        re = "pushd ~/nixconfig
+        re = "pushd /persist/home/aruna/nixconfig
            \n doas nixos-rebuild switch --flake '.#laptop'
            \n popd";
 
@@ -156,13 +150,6 @@
         lo = "swaymsg output eDP-1 dpms off";
         ln = "swaymsg output eDP-1 dpms on";
         # nix-shell with rust development tools
-        rus =
-          " 
-            	   cp ~/nixconfig/modules/languages/rust/{flake.nix,flake.lock} ~/rust/\
-            	   cd ~/rust \ 
-            	   nix develop -c $SHELL\
-                       ";
-        # update configuation.nix to git repository
         yt = "ytfzf -t --thumb-viewer=kitty -f -s --detach -l --preview-side=right"; # youtube 
       };
 

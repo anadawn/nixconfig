@@ -180,6 +180,10 @@
                 Value = true;
                 Status = "locked";
               };
+              "media.peerconnection.enabled" = {
+                Value = false;
+                Status = "locked";
+              };
             };
           };
         });
@@ -187,6 +191,8 @@
         id = 0;
         name = "Default";
         isDefault = true;
+
+
         settings = {
           "app.shield.optoutstudies.enabled" = false;
           "privacy.donottrackheader.enabled" = true;
