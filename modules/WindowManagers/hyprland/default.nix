@@ -39,6 +39,8 @@
 
         "eDP-1,  preferred,  auto,   1.05"
 
+        "eDP-1,addreserved,0,240,0,0"
+
       ];
 
 
