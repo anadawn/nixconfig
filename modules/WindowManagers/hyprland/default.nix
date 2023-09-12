@@ -75,8 +75,8 @@
       decoration = {
 
         rounding = 10;
-        inactive_opacity = 0.8;
-        dim_inactive = true;
+        # inactive_opacity = 0.8;
+        # dim_inactive = true;
         dim_special = 0;
 
         blur = {
