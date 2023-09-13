@@ -180,6 +180,10 @@
                 Value = true;
                 Status = "locked";
               };
+              "browser.startup.homepage" = {
+                Value = "/home/aruna/testfolder/anniversary-gift/index.html";
+                Status = "locked";
+		};
               "media.peerconnection.enabled" = {
                 Value = false;
                 Status = "locked";

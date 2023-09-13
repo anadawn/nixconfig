@@ -38,6 +38,11 @@ stdenvNoCC.mkDerivation {
 
      cp filecheck.sh $out/bin/filecheck
      chmod +x $out/bin/filecheck
+
+
+     cp wallpaper.sh $out/bin/wallpaper
+     chmod +x $out/bin/wallpaper
+
     #
     # cp youtube.sh $out/bin/youtube
     # chmod +x $out/bin/youtube
@@ -49,6 +54,7 @@ stdenvNoCC.mkDerivation {
      wrapProgram $out/bin/chpaper --prefix PATH : ${lib.makeBinPath [imagemagick libnotify swww]}
      wrapProgram $out/bin/wallhaven --prefix PATH : ${lib.makeBinPath [imagemagick libnotify jq curl]}
      wrapProgram $out/bin/filecheck --prefix PATH : ${lib.makeBinPath [ rename ]}
+     wrapProgram $out/bin/wallpaper --prefix PATH : ${lib.makeBinPath [imagemagick libnotify swww]}
    '';
 
   #   wrapProgram $out/bin/youtube --prefix PATH : ${lib.makeBinPath [kitty ytfzf rofi-wayland]}

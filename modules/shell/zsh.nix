@@ -83,6 +83,23 @@ xargs -I '{}' find ~/Videos/ -name {} | xargs mpv'';
       "nix" "shell" "nixpkgs#"$1"" $2
       }
 
+      TodayDate=$(date +%d)
+      TodayTime=$(date +%R)
+      MonthNum=$(date +%b)
+      if [ "$TodayDate" -eq "14" ]; #-a "$TodayTime" -eq 02:04 ];
+      then
+      echo "
+
+
+╦ ╦╔═╗╔═╗╔═╗╦ ╦  ╔═╗╔╗╔╔╗╔╦╦  ╦╔═╗╦═╗╔═╗╔═╗╦═╗╦ ╦  ╔═╗╦ ╦╔═╗╦═╗╦ ╦
+╠═╣╠═╣╠═╝╠═╝╚╦╝  ╠═╣║║║║║║║╚╗╔╝║╣ ╠╦╝╚═╗╠═╣╠╦╝╚╦╝  ║  ╠═╣╠═╣╠╦╝║ ║
+╩ ╩╩ ╩╩  ╩   ╩   ╩ ╩╝╚╝╝╚╝╩ ╚╝ ╚═╝╩╚═╚═╝╩ ╩╩╚═ ╩   ╚═╝╩ ╩╩ ╩╩╚═╚═╝
+
+"
+fi
+
+
+
       # launch w3m with a search query
 
       ww(){

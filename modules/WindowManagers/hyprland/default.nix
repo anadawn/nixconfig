@@ -32,7 +32,10 @@
 
 
       # wallpaper
-      exec = "${pkgs.scripts}/bin/chpaper ${config.xdg.userDirs.pictures}/Wallpapers";
+      exec = [
+      "${pkgs.scripts}/bin/chpaper ${config.xdg.userDirs.pictures}/Wallpapers"
+      "${pkgs.scripts}/bin/wallpaper"
+     ];
 
       monitor = [
 
