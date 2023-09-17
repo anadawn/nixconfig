@@ -36,6 +36,16 @@
   #services.teamviewer.enable = true;
 
 
+# DNS
+  services.resolved = {
+    enable = true;
+    dnssec = "false";
+    domains = [ "~." ];
+    extraConfig = "DNS=194.242.2.4 \n DNSOverTLS=opportunistic";
+
+  };
+
+
   # Doridcam
   # programs.droidcam.enable = true;
 
