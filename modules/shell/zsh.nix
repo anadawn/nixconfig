@@ -78,11 +78,6 @@ xargs -I '{}' find ~/Videos/ -name {} | xargs mpv'';
 
       export KEYTIMEOUT=1
 
-      # nix shell alias
-      shell(){
-      "nix" "shell" "nixpkgs#"$1"" $2
-      }
-
       TodayDate=$(date +%d)
       TodayTime=$(date +%R)
       MonthNum=$(date +%b)
