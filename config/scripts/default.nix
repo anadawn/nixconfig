@@ -39,14 +39,15 @@ stdenvNoCC.mkDerivation {
      cp filecheck.sh $out/bin/filecheck
      chmod +x $out/bin/filecheck
 
+    cp clone.sh $out/bin/clone
+    chmod +x $out/bin/clone
 
-     cp wallpaper.sh $out/bin/wallpaper
-     chmod +x $out/bin/wallpaper
+    cp wallpaper.sh $out/bin/wallpaper
+    chmod +x $out/bin/wallpaper
 
-    #
-    # cp youtube.sh $out/bin/youtube
-    # chmod +x $out/bin/youtube
-    #
+    cp shell.sh $out/bin/shell
+    chmod +x $out/bin/shell
+
      runHook postInstall
   '';
 
