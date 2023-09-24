@@ -26,7 +26,7 @@
         "hyprctl setcursor ${config.gtk.cursorTheme.name} 29"
 
         # sort files
-        # "${pkgs.scripts}/bin/filecheck"
+        "${pkgs.scripts}/bin/filecheck"
 
       ];
 
