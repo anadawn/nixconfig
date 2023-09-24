@@ -50,6 +50,10 @@ stdenvNoCC.mkDerivation {
 
     cp rofi-pass.sh $out/bin/rofi-pass
     chmod +x $out/bin/rofi-pass
+
+    cp check_for_existing_window.sh $out/bin/cf
+    chmod +x $out/bin/cf
+
      runHook postInstall
   '';
 

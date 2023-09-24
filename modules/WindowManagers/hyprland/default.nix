@@ -217,7 +217,7 @@
         "$mainModALT, SPACE, togglefloating"
 
         # general
-        "$mainMod, RETURN, exec, kitty"
+        "$mainMod, RETURN, exec, ${pkgs.scripts}/bin/cf terminal"
         "$mainModSHIFT,Q, killactive,"
         "$mainModSHIFT, E, exit,"
         "$mainMod, D, exec, rofi -show drun"
@@ -231,10 +231,10 @@
         "$mainModSHIFT, M, layoutmsg, focusmaster"
 
         # firefox
-        "$mainMod, B, exec, firefox "
         "$mainModALT, Y, exec, firefox https://www.youtube.com"
         "$mainModSHIFT, N , exec, firefox https://mipmip.github.io/home-manager-option-search/"
         "$mainMod, N, exec, firefox https://search.nixos.org/packages"
+        "$mainMod, B, exec, ${pkgs.scripts}/bin/cf browser"
 
         # ytfzf
         "$mainMod, Y, exec, kitty --class=ytfzf -e ytfzf -t -T kitty -l -s -f --preview-side=right"
