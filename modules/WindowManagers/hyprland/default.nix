@@ -211,6 +211,9 @@
 
       bind = [
 
+         # suspend laptop when lid is closed
+         ",code:248, exec, systemctl suspend"
+
         #wallpaper
         "SUPER, W, exec, ${pkgs.scripts}/bin/chpaper $(wallhaven ${config.xdg.userDirs.pictures}/Wallpapers)"
 
