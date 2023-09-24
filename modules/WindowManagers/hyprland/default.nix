@@ -221,7 +221,7 @@
         "$mainModSHIFT,Q, killactive,"
         "$mainModSHIFT, E, exit,"
         "$mainMod, D, exec, rofi -show drun"
-        "$mainMod, P, exec, tessen -d rofi"
+        "$mainMod, P, exec, rofi-pass"
 
         # hyprland reload
         "$mainModSHIFT, c, exec, hyprctl reload"

@@ -48,6 +48,8 @@ stdenvNoCC.mkDerivation {
     cp shell.sh $out/bin/shell
     chmod +x $out/bin/shell
 
+    cp rofi-pass.sh $out/bin/rofi-pass
+    chmod +x $out/bin/rofi-pass
      runHook postInstall
   '';
 
