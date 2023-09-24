@@ -161,9 +161,9 @@
        "move 13% 3%, class:^(kitty)$"
  
         # JupyterLab
-       "float, class:^(jupyterlab-desktop)$" 
-       "size 99.5% 66%, class:^(jupyterlab-desktop)$" 
-       "move 0 4, class:^(jupyterlab-desktop)$" 
+       "float, class:^(jupyterlab-desktop)$"
+       "size 99.5% 66%, class:^(jupyterlab-desktop)$"
+       "move 0 4, class:^(jupyterlab-desktop)$"
  
 
         # playlist
@@ -261,7 +261,7 @@
         "$mainModSHIFT, P, exec, ~/.config/scripts/playlist.sh" #ytmusic playlist
         "$mainModSHIFT, S, exec, ~/.config/scripts/change-sink.sh" #change audio sink while connected to external display
         "$mainModSHIFT, D, exec, ~/.config/scripts/bluetooth.sh" #select bluetooth devices
-        "$mainMod, M, exec, ~/.config/scripts/movie.sh" #select bluetooth devices
+        "$mainMod, M, exec, ~/.config/scripts/movie.sh" # select and play videos
 
         # kitty in floating window
         "$mainModSHIFT, RETURN, exec, kitty -1"
@@ -278,7 +278,7 @@
         "$mainModALT, P, pin"
 
         # bring activewindow to top
-        "$mainMod, A, bringactivetotop "
+        "$mainMod, A, bringactivetotop"
 
         # blur window
         "$mainMod, DELETE, togglespecialworkspace, special:hello "
@@ -317,7 +317,7 @@
         #specialworkspace (scratchpad in sway)
         "$mainModSHIFT, MINUS, movetoworkspace, special"
         "$mainMod, MINUS, togglespecialworkspace"
-        "$mainMod, MINUS, exec, hyprctl keyword decoration:blur:special false  "
+        "$mainMod, MINUS, exec, hyprctl keyword decoration:blur:special false"
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
