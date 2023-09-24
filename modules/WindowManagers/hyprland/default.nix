@@ -194,6 +194,9 @@
         "8, monitor:HDMI-A-1"
         "0, monitor:HDMI-A-1"
 
+        "name:browser, monitor:HDMI-A-1"
+        "name:video, monitor:HDMI-A-1, gapsin:0, gapsout:0"
+
       ];
 
       "$mainMod" = "SUPER";
