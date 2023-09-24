@@ -28,6 +28,9 @@
         # sort files
         "${pkgs.scripts}/bin/filecheck"
 
+         # autostart kitty
+         "[workspace special:kitty silent]  kitty -1 --title Main --class=main --listen-on unix:/tmp/mykitty"
+
       ];
 
 
