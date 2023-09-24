@@ -221,6 +221,9 @@
         ",KP_Subtract,exec,${pkgs.light}/bin/light -U 10"
         ",KP_Add,exec,${pkgs.light}/bin/light -A 10"
 
+	# show all active windows
+	"$mainMod, TAB, exec, rofi -show window"
+
         # floating, fullscreen and focus
         "$mainModSHIFT, SPACE, fullscreen,1"
         "$mainMod, F, fullscreen,0"
