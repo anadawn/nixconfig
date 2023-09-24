@@ -141,9 +141,13 @@
         "dimaround, class:^(launcher)$"
 
          # mpv
-        "float, class:^(mpv)$"
-        "size 99.5% 66%, class:^(mpv)$"
-        "move 0 4, class:^(mpv)$"
+	"workspace name:video, class:^(mpv)$"
+        # "float, class:^(mpv)$"
+        # "size 99.5% 66%, class:^(mpv)$"
+        # "move 0 4, class:^(mpv)$"
+
+	# firefox
+	"workspace name:browser, class:^(firefox)$"
 
         # imv
         "float, class:^(imv)$"
@@ -152,9 +156,9 @@
 
 
         # kitty
-       "float, class:^(ytfzf)$" 
-       "size 74% 63%, class:^(ytfzf)$" 
-       "move 13% 3%, class:^(ytfzf)$" 
+       "float, class:^(kitty)$"
+       "size 74% 63%, class:^(kitty)$"
+       "move 13% 3%, class:^(kitty)$"
  
         # JupyterLab
        "float, class:^(jupyterlab-desktop)$" 
@@ -168,10 +172,8 @@
         "move 90.8% 2.3%, class:^(mpv)$,title:^(playlist)$"
         "noinitialfocus, class:^(mpv)$,title:^(playlist)$"
 
-        # kitty
-        "float, class:^(ytfzf)$"
-        "size 74% 74%, class:^(ytfzf)$"
-        "center, class:^(ytfzf)$"
+	# kitty main
+        "workspace special:kitty, class:^(main)$"
 
       ];
 
@@ -222,6 +224,7 @@
 
         # general
         "$mainMod, RETURN, exec, ${pkgs.scripts}/bin/cf terminal"
+        "$mainModALT, RETURN, movetoworkspace, special:kitty "
         "$mainModSHIFT,Q, killactive,"
         "$mainModSHIFT, E, exit,"
         "$mainMod, D, exec, rofi -show drun"
@@ -235,14 +238,18 @@
         "$mainModSHIFT, M, layoutmsg, focusmaster"
 
         # firefox
-        "$mainModALT, Y, exec, firefox https://www.youtube.com"
-        "$mainModSHIFT, N , exec, firefox https://mipmip.github.io/home-manager-option-search/"
-        "$mainMod, N, exec, firefox https://search.nixos.org/packages"
         "$mainMod, B, exec, ${pkgs.scripts}/bin/cf browser"
+        "$mainModALT, Y, exec, firefox --new-tab https://www.youtube.com"
+        "$mainModALT, Y, workspace, name:browser"
+        "$mainModSHIFT, N , exec, firefox --new-tab https://mipmip.github.io/home-manager-option-search/"
+        "$mainMod, N, exec, firefox --new-tab https://search.nixos.org/packages"
+        "$mainModSHIFT, N , workspace, name:browser"
 
         # ytfzf
-        "$mainMod, Y, exec, kitty --class=ytfzf -e ytfzf -t -T kitty -l -s -f --preview-side=right"
-        "$mainMod, s, exec, kitty --class=ytfzf -e ytfzf -t -T kitty -l -s -f -c S --preview-side=right"
+        "$mainMod, Y, exec, kitty @ --to unix:/tmp/mykitty launch --title youtube --type tab ytfzf -t -T kitty -l -s -f --preview-side=right"
+        "$mainMod, Y, workspace, special:kitty"
+        "$mainMod, s, exec, kitty @ --to unix:/tmp/mykitty launch --title subscriptions --type tab ytfzf -t -T kitty -l -s -f -c S --preview-side=right"
+        "$mainMod, s, workspace, special:kitty"
 
         # scripts
         "$mainModSHIFT, B, exec, ~/.config/scripts/bookmarks.sh" # calls a script which show bookmarks
@@ -257,7 +264,7 @@
         "$mainMod, M, exec, ~/.config/scripts/movie.sh" #select bluetooth devices
 
         # kitty in floating window
-        "$mainModSHIFT, RETURN, exec, kitty --class=ytfzf"
+        "$mainModSHIFT, RETURN, exec, kitty -1"
 
         ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" # mute
 
@@ -287,7 +294,7 @@
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
         "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
+        "$mainMod, 4, workspace, name:video"
         "$mainMod, 5, workspace, 5"
         "$mainMod, 6, workspace, 6"
         "$mainMod, 7, workspace, 7"
@@ -299,7 +306,7 @@
         "$mainMod SHIFT, 1, movetoworkspace, 1"
         "$mainMod SHIFT, 2, movetoworkspace, 2"
         "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
+        "$mainMod SHIFT, 4, movetoworkspace, name:video"
         "$mainMod SHIFT, 5, movetoworkspace, 5"
         "$mainMod SHIFT, 6, movetoworkspace, 6"
         "$mainMod SHIFT, 7, movetoworkspace, 7"
