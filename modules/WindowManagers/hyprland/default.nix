@@ -87,7 +87,7 @@
 
         blur = {
 
-          # special = false;
+          special = false;
 
         };
       };
@@ -107,6 +107,7 @@
       master = {
         new_is_master = true;
         new_on_top = true;
+	special_scale_factor = 1.0;
       };
 
       gestures = {
@@ -121,12 +122,12 @@
       # animation
       animation = [
 
-        "windowsMove, 1, 3, default, slide"
-        "windows, 0, 3, default"
+        "windowsMove, 1, 0.5, default, slide"
+        "windows, 0, 1, default"
         "fade, 0, 1, default"
         "border, 0, 1, default"
         "borderangle, 0, 1, default"
-        "workspaces, 1, 3, default"
+        "workspaces, 1, 0.5, default"
 
       ];
 
