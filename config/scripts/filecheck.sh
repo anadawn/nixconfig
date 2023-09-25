@@ -29,12 +29,4 @@ do
 
         elif [[ $file =~ .*\.(iso) ]]; then
 	        mv $file $HOME/Other/iso
-
-        elif [[ $(echo $file | awk -F '/' '{print $4}') == "Downloads" || $file == *"."* ]]; then
-
-             ls --color=never -d */ */*/ |
-	     grep -E 'Documents|Picture|Videos|Other' |
-	     dmenu -i -p "New file type detected where to move" |
-	     xargs -I '{}' mv $file "$HOME/{}"
-         fi
 done
