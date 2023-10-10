@@ -58,7 +58,30 @@
 
   services.flatpak.enable = true;
 
-  networking.hostName = "mylaptop";
+  networking = {
+    hostName = "mylaptop";
+    networkmanager = {
+      dns = "systemd-resolved";
+      wifi = {
+        backend = "iwd";
+        powersave = false;
+      };
+    };
+    useDHCP = false;
+    wireless = {
+      iwd = {
+        enable = true;
+        settings = {
+          General = {
+            AddressRandomization = "network";
+          };
+          Settings = {
+            AutoConnect = true;
+          };
+        };
+      };
+    };
+  };
 
   # bluetooth 
   hardware.bluetooth.enable = true;
