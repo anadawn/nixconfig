@@ -29,4 +29,9 @@ do
 
         elif [[ $file =~ .*\.(iso) ]]; then
 	        mv $file $HOME/Other/iso
+
+        elif [[ $(echo $file | awk -F '/' '{print $4}') == "Downloads" || $file == *"."* ]]; then
+					notify-send -u critical "New file type detected '$(echo $file | awk -F '/' '{print $5}')'"
+					sleep 20
+         fi
 done

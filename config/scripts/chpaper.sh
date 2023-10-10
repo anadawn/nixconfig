@@ -1,23 +1,16 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-set -eu
+wpname=`shuf -i 1-10 -n 1`
+wallpaper_url='https://raw.githubusercontent.com/Krizdano/wallpapers/main/images/'$wpname'.png'
+wallpaper='/tmp/wallpaper.png'
+backup_wallpaper='Pictures/.backup_wallpaper.png'
 
-DIR="${1:-}"
-if [ -z "$DIR" ]; then
-  echo "Usage: $0 <path to directory containing wallpapers>"
-  exit 1
+if : >/dev/tcp/8.8.8.8/53; then
+	curl --silent --output $wallpaper $wallpaper_url 
+	cp $wallpaper $backup_wallpaper
+	swww query || swww init
+	swww img --transition-type random --transition-duration 1 $wallpaper
+else
+	swww query || swww init
+	swww img --transition-type random --transition-duration 1 $backup_wallpaper
 fi
-
-random_paper() {
-  if [ -d "$DIR" ] ; then
-    find -L "${DIR}"/ -type f -regextype egrep -regex ".*\.(jpe?g|png)$" | shuf -n1
-  elif [ -f "$DIR" ] ; then
-    echo "$DIR"
-  fi
-}
-
-swww query || swww init
-convert "$(random_paper)" /tmp/wallpaper.jpg && swww img --transition-type random --transition-duration 1 "/tmp/wallpaper.jpg"
-convert "$(random_paper)" /tmp/lockpaper.jpg
-
-notify-send -r 9897 -i information -t 1000 "Wallpaper" "Wallpaper changed."

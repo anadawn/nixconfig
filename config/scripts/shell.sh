@@ -8,6 +8,8 @@ c=$(echo "$b" | wc -w)
 
 flake="nixpkgs#"
 
+input="--inputs-from /persist/home/aruna/nixconfig"
+
 
 #options
 while getopts 'gi' options; do
@@ -18,7 +20,7 @@ while getopts 'gi' options; do
 	exit
 	;;
         i)
-		nix shell "nixpkgs#$2" --impure
+		nix shell $input "nixpkgs#$2" --impure
 	 exit
 	;;
 
@@ -33,5 +35,5 @@ echo -n "$flake""$(echo $b | awk '{print $'$a'}') "
 done)
 # 
 
-nix shell $num
+nix shell $input $num
 
