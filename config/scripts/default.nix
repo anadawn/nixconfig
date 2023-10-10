@@ -47,9 +47,7 @@ stdenvNoCC.mkDerivation {
 
   postInstall = ''
     wrapProgram $out/bin/chpaper --prefix PATH : ${lib.makeBinPath [imagemagick libnotify swww]}
-    wrapProgram $out/bin/wallhaven --prefix PATH : ${lib.makeBinPath [imagemagick libnotify jq curl]}
     wrapProgram $out/bin/filecheck --prefix PATH : ${lib.makeBinPath [ rename ]}
-    wrapProgram $out/bin/wallpaper --prefix PATH : ${lib.makeBinPath [imagemagick libnotify swww]}
   '';
 
 }
