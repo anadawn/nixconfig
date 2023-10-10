@@ -11,8 +11,14 @@
 #               └─ home.nix *
 #
 
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+let
+  ut = "${pkgs.scripts}/bin/ut";
+  change-wallpaper = "${pkgs.scripts}/bin/chpaper";
+  cf = "${pkgs.scripts}/bin/cf";
 
+in
+{
   wayland.windowManager.hyprland = {
     enable = true;
     systemdIntegration = true;
@@ -29,15 +35,14 @@
         "${pkgs.scripts}/bin/filecheck"
 
          # autostart kitty
-         "[workspace special:kitty silent]  kitty -1 --title Main --class=main --listen-on unix:/tmp/mykitty"
+         "[workspace special:terminal silent]  kitty -1 --title Main --class=main --listen-on unix:/tmp/mykitty"
 
       ];
 
 
       # wallpaper
       exec = [
-      "${pkgs.scripts}/bin/chpaper ${config.xdg.userDirs.pictures}/Wallpapers"
-      "${pkgs.scripts}/bin/wallpaper"
+        "${change-wallpaper}"
      ];
 
       monitor = [
@@ -173,7 +178,7 @@
         "noinitialfocus, class:^(mpv)$,title:^(playlist)$"
 
 	# kitty main
-        "workspace special:kitty, class:^(main)$"
+        "workspace special:terminal, class:^(main)$"
 
       ];
 
@@ -214,9 +219,6 @@
          # suspend laptop when lid is closed
          ",code:248, exec, systemctl suspend"
 
-        #wallpaper
-        "SUPER, W, exec, ${pkgs.scripts}/bin/chpaper $(wallhaven ${config.xdg.userDirs.pictures}/Wallpapers)"
-
         # brightness
         ",KP_Subtract,exec,${pkgs.light}/bin/light -U 10"
         ",KP_Add,exec,${pkgs.light}/bin/light -A 10"
@@ -232,12 +234,12 @@
         "$mainModALT, SPACE, togglefloating"
 
         # general
-        "$mainMod, RETURN, exec, ${pkgs.scripts}/bin/cf terminal"
+        "$mainMod, RETURN, exec, ${cf} terminal"
         "$mainModALT, RETURN, movetoworkspace, special:kitty "
         "$mainModSHIFT,Q, killactive,"
         "$mainModSHIFT, E, exit,"
         "$mainMod, D, exec, rofi -show drun"
-        "$mainMod, P, exec, rofi-pass"
+        "$mainMod, P, exec, ${pkgs.scripts}/bin/rofi-pass"
 
         # hyprland reload
         "$mainModSHIFT, c, exec, hyprctl reload"
@@ -247,12 +249,10 @@
         "$mainModSHIFT, M, layoutmsg, focusmaster"
 
         # firefox
-        "$mainMod, B, exec, ${pkgs.scripts}/bin/cf browser"
-        "$mainModALT, Y, exec, firefox --new-tab https://www.youtube.com"
-        "$mainModALT, Y, workspace, name:browser"
-        "$mainModSHIFT, N , exec, firefox --new-tab https://mipmip.github.io/home-manager-option-search/"
-        "$mainMod, N, exec, firefox --new-tab https://search.nixos.org/packages"
-        "$mainModSHIFT, N , workspace, name:browser"
+        "$mainMod, B, exec, ${cf} browser"
+        "$mainModALT, Y, exec, ${cf} youtube_in_browser"
+        "$mainModSHIFT, N , exec, ${cf} home_manager_search"
+        "$mainMod, N, exec, ${cf} nixpkgs_search"
 
         # ytfzf
         "$mainMod, Y, exec, kitty @ --to unix:/tmp/mykitty launch --title youtube --type tab ytfzf -t -T kitty -l -s -f --preview-side=right"
@@ -261,16 +261,16 @@
         "$mainMod, s, workspace, special:kitty"
 
         # scripts
-        "$mainModSHIFT, B, exec, ~/.config/scripts/bookmarks.sh" # calls a script which show bookmarks
-        "$mainModSHIFT, Y, exec, ~/.config/scripts/yt_cli.sh"
-        "$mainMod, R, exec, ~/.config/scripts/powermenu.sh"
-        "$mainModALT, B, exec, ~/.cofig/scripts/add_bookmark.sh"
+        "$mainModSHIFT, B, exec, ${ut} my_bookmarks" # shows my bookmarks
+        "$mainModSHIFT, Y, exec, ${ut} youtube_mpv" # play youtube links in mpv using ytfzf
+        "$mainMod, R, exec, ${ut} power_menu" # power menu
+        "$mainModALT, B, exec, ${ut} add_bookmark" # add a new bookmark to my bookmark file
         "$mainMod, C, exec, ~/.config/scripts/conf.sh"
-        "$mainMod, O, exec, ~/.config/scripts/laptopscreen.sh"
-        "$mainModSHIFT, P, exec, ~/.config/scripts/playlist.sh" #ytmusic playlist
-        "$mainModSHIFT, S, exec, ~/.config/scripts/change-sink.sh" #change audio sink while connected to external display
-        "$mainModSHIFT, D, exec, ~/.config/scripts/bluetooth.sh" #select bluetooth devices
-        "$mainMod, M, exec, ~/.config/scripts/movie.sh" # select and play videos
+        "$mainMod, O, exec, ${ut} toggle_screen" # toggle on/off laptop screen
+        "$mainModSHIFT, P, exec, ${ut} my_playlist" # Select and plays my music playlists
+        "$mainModSHIFT, S, exec, ${ut} change_default_sink" # changes default audio sink
+        "$mainModSHIFT, D, exec, ${ut} connect_bluetooth" # connect to already paired bluetooth devices
+        "$mainMod, M, exec, ${ut} play_videos" # Select and play videos from Videos directory
 
         # kitty in floating window
         "$mainModSHIFT, RETURN, exec, kitty -1"
@@ -365,6 +365,48 @@
 
 
     };
+
+    extraConfig = ''
+      # Make kitty keybindings more like vim
+      # reduces opacity to know we are inside a submap
+      bindr=CONTROL,Control_L,exec,hyprctl keyword decoration:active_opacity 0.6
+
+      # keybinding for enabling kittyvimode
+      bindr=CONTROL,Control_L,submap,kittyvimode
+
+      # submap
+      submap=kittyvimode
+
+      # keybindings related to tabs in kitty
+      bind=,T,exec, wtype -M ctrl -M shift t # open new tab
+      bind=SHIFT,H,exec, wtype -M ctrl -M shift -P Left # previous tab
+      bind=SHIFT,l,exec, wtype -M ctrl -M shift -P Right # nex tab
+
+      # kebindings related to windos in kitty
+      bind=,q,exec, wtype -M ctrl -M shift w # close window 
+      bind=,RETURN,exec, kitty @ --to unix:/tmp/mykitty new-window # close window/tab
+      bind=,H,exec, wtype -M ctrl -M shift [ # previous window
+      bind=,L,exec, wtype -M ctrl -M shift ] # next window
+      bind=,J,exec, wtype -M ctrl -M shift [ # previous window
+      bind=,K,exec, wtype -M ctrl -M shift ] # next window
+
+      # kitty scrollback_buffer
+      bind=,P,exec, wtype -M ctrl -M shift h
+      # show outputs of a command in scroll_back_buffer
+      bind=,G,exec, wtype -M ctrl -M shift g
+
+      # switch between window layouts in kitty
+      bind=,S,exec, wtype -M ctrl -M shift l
+
+      # reset opacity
+      bind=,i,exec,hyprctl keyword decoration:active_opacity 1
+      # use reset to go back to the global submap
+      bind=,i,submap,reset
+
+      # will reset the submap, meaning end the current one and return to the global one
+
+      submap=reset
+    '';
   };
 
 }
